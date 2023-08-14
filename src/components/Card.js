@@ -19,6 +19,7 @@ const Card = (props) => {
 				<div className="flex items-center">
 				<input type="checkbox" class="mr-2"></input>
 				<p className="font-bold text-gray-700">{props.data.title}</p>
+				{/* <span>{props.card?.length} </span> */}
 				</div>
 				<div className="mb-2 text-base font-normal tracking-tight text-gray-900 ml-5">{props.data.tag}</div>
 				<i class="fa-solid fa-triangle-exclamation"></i>

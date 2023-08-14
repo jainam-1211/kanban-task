@@ -120,37 +120,45 @@ const Page = () => {
 					flexDirection: "row",
 				}}
 			>
-				{categories.map((category) => (
-					<div key={category} className="m-5">
-						{currentCategory === "userId" ? (
-							<div>
-							<img
-							className="w-5 h-5 rounded-full float-left"
-							src={faker.image.avatar()}
-							alt="user"
-							/>
-							<h1 className="font-bold text-base text-opacity-5 pl-6 pb-4">{mapping[category]}</h1>
-							</div>
-						) : currentCategory === "priority" ? (
-							<h1 className="font-bold text-opacity-5">{priorityMapping[category]}</h1>
-						) : (
-							<h1 className="font-bold text-opacity-5">{category}</h1>
-						)}
-						{data
-							.filter((ticket) => {
-								if (!currentCategory) {
-									return true;
-								} else {
-									return ticket[currentCategory] === category;
-								}
-							})
-							.map((ticket) => (
-								<div className="mb-3" key={ticket.id}>
-									<Card data={ticket} />
-								</div>
-							))}
-					</div>
-				))}
+{categories.map((category) => (
+    <div key={category} className="m-5">
+        {currentCategory === "userId" ? (
+            <div>
+                <img
+                    className="w-5 h-5 rounded-full float-left"
+                    src={faker.image.avatar()}
+                    alt="user"
+                />
+                <h1 className="font-bold text-base text-opacity-5 pl-6 pb-4">
+                    {mapping[category]} ({currentCategory === "" ? data.length : data.filter((ticket) => ticket[currentCategory] === category).length})
+                </h1>
+            </div>
+        ) : currentCategory === "priority" ? (
+            <h1 className="font-bold text-opacity-5">
+                {priorityMapping[category]} ({currentCategory === "" ? data.length : data.filter((ticket) => ticket[currentCategory] === category).length})
+            </h1>
+        ) : (
+            <h1 className="font-bold text-opacity-5">
+                {category} ({currentCategory === "" ? data.length : data.filter((ticket) => ticket[currentCategory] === category).length})
+            </h1>
+        )}
+        {data
+            .filter((ticket) => {
+                if (!currentCategory) {
+                    return true;
+                } else {
+                    return ticket[currentCategory] === category;
+                }
+            })
+            .map((ticket) => (
+                <div className="mb-3" key={ticket.id}>
+                    <Card data={ticket} />
+                </div>
+            ))}
+    </div>
+))}
+
+
 			</div>
 		</div>
 	);
