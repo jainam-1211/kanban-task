@@ -51,7 +51,7 @@ const Page = () => {
 			}
 		}
 		fetchData();
-	}, []);
+	}, [priorities, statuses, users]);
 
 	const sortTickets = (key) => {
 		const sortedTickets = [...data].sort((a, b) => {
